@@ -1,6 +1,5 @@
-import { useMutation } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { slugify } from "../lib/slugify";
-import { gql } from "@apollo/client";
 import { useState } from "react";
 import { useRouter } from "next/router";
 

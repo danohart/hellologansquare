@@ -1,6 +1,5 @@
-import { useMutation } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import Error from "./Error";
-import { gql } from "@apollo/client";
 import useForm from "../lib/useForm";
 import { CURRENT_USER_QUERY } from "./Signin";
 

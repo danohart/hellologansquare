@@ -1,8 +1,7 @@
 import React, { useState, useRef } from "react";
 import Meta from "../components/Meta";
 import Loading from "../components/Loading";
-import { useQuery } from "@apollo/client";
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
 const RANDOM_PLACES_QUERY = gql`
   query RANDOM_PLACES_QUERY {

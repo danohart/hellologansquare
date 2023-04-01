@@ -1,6 +1,5 @@
 import react, { useState } from "react";
-import { useQuery, useMutation } from "@apollo/client";
-import { gql } from "@apollo/client";
+import { gql, useQuery, useMutation } from "@apollo/client";
 import Login from "./Login";
 import Popup from "./Popup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

@@ -1,8 +1,7 @@
 import Loading from "../components/Loading";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { useQuery } from "@apollo/client";
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import { DocumentRenderer } from "@keystone-6/document-renderer";
 import { CategoryIcon, PathIcon } from "../components/Icons";
 

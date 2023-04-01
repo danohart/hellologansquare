@@ -2,8 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Place from "../components/Place";
 import Loading from "../components/Loading";
-import { useQuery } from "@apollo/client";
-import { gql } from "@apollo/client";
+import { useQuery, gql } from "@apollo/client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleRight } from "@fortawesome/free-solid-svg-icons";
 

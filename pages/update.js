@@ -1,7 +1,5 @@
-import { useQuery, useMutation } from "@apollo/client";
-import { gql } from "@apollo/client";
+import { gql, useQuery, useMutation } from "@apollo/client";
 import { useState } from "react";
-import fetch from "isomorphic-unfetch";
 import Head from "next/head";
 
 const UPDATE_PLACES = gql`

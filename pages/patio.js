@@ -2,8 +2,7 @@ import React from "react";
 import Place from "../components/Place";
 import Loading from "../components/Loading";
 import Hero from "../components/Hero";
-import { useQuery } from "@apollo/client";
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import Meta from "../components/Meta";
 
 const PATIO_QUERY = gql`

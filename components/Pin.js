@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapMarker,
