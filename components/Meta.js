@@ -25,10 +25,7 @@ export default function Meta(props) {
         property='og:description'
         content={props.description || metaDescription}
       />
-      <meta
-        property='og:image'
-        content='https://helloLogan Square.co/hello-Logan Square-local.png'
-      />
+      <meta property='og:image' content='/hello-chicago-local.png' />
     </Head>
   );
 }
