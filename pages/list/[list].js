@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Place from "../../components/Place";
 import Loading from "../../components/Loading";
-import { useQuery } from "@apollo/client";
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import Meta from "../../components/Meta";
 import { useRouter } from "next/router";
 
