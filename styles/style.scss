@@ -1,0 +1,818 @@
+@import "variables";
+@import "mixins";
+
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+html {
+  margin: 0;
+}
+
+body {
+  font-family: $primary-font;
+  color: $primary-color;
+  background-color: #ECF2D5;
+  font-size: 16px;
+  padding: 0px;
+  margin: 0px auto;
+  max-width: 1440px;
+  height: 100%;
+}
+
+.center-align {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: $secondary-font;
+  margin: 10px 0px 10px 0px;
+  padding: 0px;
+  line-height: 0.95em;
+  font-weight: 800;
+}
+
+h1 {
+  font-size: 4em;
+
+  @include tablet {
+    font-size: 3em;
+  }
+
+  @include mobile {
+    font-size: 2.9em;
+  }
+}
+
+h2 {
+  font-size: 3.4em;
+
+  @include tablet {
+    font-size: 2.4em;
+  }
+
+  @include mobile {
+    font-size: 2em;
+  }
+}
+
+h3 {
+  font-size: 2.2em;
+
+  @include tablet {
+    font-size: 1.2em;
+  }
+
+  @include mobile {
+    font-size: 1.2em;
+  }
+}
+
+a {
+  color: $dark-gray;
+  text-decoration: none;
+}
+
+p {
+  margin: 14px 0;
+}
+
+button {
+  @include button;
+}
+
+.button {
+  @include button;
+}
+
+.graphql-error {
+  border-left: 5px solid red;
+  padding-left: 10px;
+}
+
+.loading {
+  width: 100%;
+
+  .hide {
+    display: none;
+  }
+
+  &-placeholder {
+    background-color: $primary-color;
+    width: 80%;
+    height: 34px;
+    margin-bottom: 6px;
+    animation: loading 2s infinite;
+    background: linear-gradient(to right, $secondary-color-bold 4%, $background-color 25%, $secondary-color-bold 36%);
+    background-size: 1000px 100%;
+
+    &.medium {
+      height: 28px;
+      width: 60%;
+    }
+
+    &.small {
+      height: 18px;
+      width: 40%;
+    }
+  }
+}
+
+.hero-wrapper {
+  background-size: cover;
+  background-position: top center;
+  background-image: url("/theater.jpg");
+
+  .hero {
+    background-color: rgba(1, 35, 15, 0.65);
+    padding: 120px 0px;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    h2 {
+      font-size: 2.4em;
+      text-transform: capitalize;
+    }
+
+    @include mobile {
+      padding: 40px 15px;
+      min-height: 200px;
+    }
+
+    .description {
+      text-align: center;
+      color: #ffffff;
+      width: 50%;
+
+      @include mobile {
+        width: 80%;
+      }
+
+      p {
+        font-size: 21px;
+      }
+    }
+
+    .search {
+      margin-top: 10px;
+      width: 60%;
+      max-width: 500px;
+
+      @include mobile {
+        width: 80%;
+      }
+
+      input[type="text"] {
+        appearance: none;
+        padding: 8px 0px 8px 8px;
+        width: 100%;
+        border: 0;
+        font-size: 1em;
+        @include rounded-corners;
+      }
+    }
+
+    .cagegories {
+      padding: 10px;
+      @include button;
+      font-size: 11px;
+
+      a {
+        color: $primary-color;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.signin {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  right: 0;
+  padding: 10px 10px 10px 10px;
+  text-align: right;
+  z-index: 10;
+  @include ease-transition;
+
+  &-form {
+    fieldset {
+      display: flex;
+      flex-direction: column;
+      padding: 20px 0;
+      border: none;
+
+      label {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        text-align: left;
+
+        input[type="text"],
+        input[type="password"] {
+          padding: 5px;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+
+  &:after {
+    content: "";
+    flex-basis: 80%;
+    background-color: $secondary-color;
+    padding: 2px 0px;
+    width: 80%;
+    margin: 10px auto;
+    display: block;
+
+    @include mobile {
+      flex-basis: 80%;
+    }
+  }
+
+  &-logo {
+    height: auto;
+    padding: 20px;
+    font-size: 65px;
+    font-weight: 900;
+
+    a {
+      color: $primary-color;
+      text-decoration: underline;
+    }
+
+    @include tablet {
+      font-size: 50px;
+    }
+
+    @include mobile {
+      font-size: 32px;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.outer-menu {
+  overflow: hidden;
+  padding: 5px 0;
+  width: 100%;
+
+  @include mobile {
+    background: linear-gradient(
+        to left,
+        rgba(0, 0, 0, 0.45) 0%,
+        transparent 100%
+      )
+      100% center;
+    background-size: 50px 100%;
+    background-repeat: no-repeat;
+    border-top: 1px solid $dark-gray;
+    border-bottom: 1px solid $dark-gray;
+  }
+}
+
+.menu {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  overflow: auto;
+  margin: 5px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @include mobile {
+    justify-content: left;
+  }
+
+  a {
+    color: $primary-color;
+  }
+
+  .button {
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    background-color: transparent;
+
+    &:hover {
+      background-color: $primary-color;
+      span {
+        color: $white;
+      }
+    }
+
+    @include mobile {
+      padding: 10px 35px;
+      margin: 5px;
+    }
+  }
+
+  span {
+    margin-left: 5px;
+    margin-top: -2px;
+    color: $primary-color;
+  }
+}
+
+.footer {
+  padding: 60px 20px 30px 20px;
+  background-color: lighten($color: $light-gray, $amount: 30);
+
+  &-inner {
+    max-width: 400px;
+  }
+
+  .copyright {
+    margin-top: 40px;
+  }
+}
+
+.hip {
+  background-image: url("/backgrounds/hip-bg.png");
+  background-size: 30%;
+  background-repeat: no-repeat;
+  padding: 0 35px;
+
+  @include mobile {
+    background-size: 50%;
+  }
+}
+
+.main {
+  min-height: 650px;
+}
+
+.page {
+  margin: 0px 20px;
+}
+
+.patio {
+  display: flex;
+  flex-direction: row;
+
+  // .card-wrapper {
+  //   .card {
+  //     width: 80%;
+  //   }
+  // }
+}
+
+.map {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  &-places {
+    margin: 0 auto;
+    display: block;
+    width: 80%;
+    height: 600px;
+
+    @include mobile {
+      height: 68vh;
+    }
+
+    .pin {
+      position: relative;
+      margin-top: -20px;
+      cursor: pointer;
+
+      &:hover {
+        color: $light-gray;
+      }
+
+      &.show {
+        color: $white;
+      }
+
+      &-info {
+        position: absolute;
+        bottom: 10px;
+        left: -2px;
+        width: 200px;
+        display: none;
+        background-color: $white;
+        padding: 10px 20px 20px 20px;
+        @include rounded-corners;
+        font-size: 12px;
+        box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.4);
+
+        &.show {
+          display: block;
+          z-index: 1;
+        }
+
+        &-close {
+          position: absolute;
+          right: 10px;
+          top: 10px;
+          display: flex;
+          width: 50%;
+          justify-content: flex-end;
+          cursor: pointer;
+
+          a {
+            color: $primary-color;
+            padding-right: 5px;
+          }
+        }
+      }
+    }
+  }
+
+  &-list {
+    width: 30%;
+    height: 600px;
+    overflow: scroll;
+
+    .card-wrapper {
+      .card {
+        width: 90%;
+        border-width: 2px;
+        margin: 5px;
+        padding: 10px;
+        
+        .title-wrapper {
+          .title {
+            font-size: 1.4rem;
+
+            @include mobile {
+              font-size: 1em;
+            }
+          }
+        }
+
+        .icons {
+          display: none;
+        }
+
+        .inner {
+          @include mobile {
+            display: none;
+          }
+        }
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &-title {
+    padding: 10px;
+    position: absolute;
+    right: 0px;
+
+    @include mobile {
+      font-size: 8px;
+    }
+  }
+}
+
+.card-wrapper {
+  display: flex;
+  padding: 0px 10px;
+  flex-wrap: wrap;
+  overflow-x: auto;
+  margin-bottom: 10px;
+  justify-content: space-evenly;
+  overflow: visible;
+  @include cards;
+}
+
+.category-page {
+  h1 {
+    text-transform: capitalize;
+    font-size: 1.2em;
+    text-align: center;
+  }
+}
+
+.place-single {
+  .card {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+.notifications {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 40%;
+
+  .notification {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px 8px;
+    background-color: $primary-color;
+    @include rounded-corners;
+    text-align: center;
+    z-index: 10;
+    box-shadow: 0px 0px 12px rgba($color: $primary-color, $alpha: 0.8);
+    transition: all ease-in-out 1s;
+    opacity: 0;
+    right: -800px;
+    position: relative;
+
+    &.open {
+      opacity: 1;
+      transition: all ease-out 0.5s;
+      right: 0px;
+    }
+
+    &-title {
+      font-weight: 700;
+      color: $white;
+    }
+
+    &-message {
+      font-size: 0.87em;
+      font-weight: 100;
+      color: $white;
+    }
+
+    &-close {
+      position: absolute;
+      top: 1px;
+      right: 0px;
+      cursor: pointer;
+      color: $white;
+      border-radius: 50%;
+      padding: 2.5px 8px;
+      cursor: pointer;
+    }
+  }
+}
+
+.category-list {
+  &-title {
+    text-align: center;
+    margin: 20px 0;
+    color: $primary-color;
+  }
+}
+
+.category-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: auto;
+  justify-content: left;
+  @include cards;
+
+  .card {
+    @include mobile {
+      width: 72vw;
+      background-color: transparent;
+      border-right: 1px solid $primary-color;
+      border-radius: 0;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .featured {
+      display: none;
+    }
+  }
+
+  .more {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 800;
+    height: 100%;
+    width: 80px;
+  }
+}
+
+.icons {
+  display: flex;
+  flex-direction: row;
+
+  .icon {
+    margin: 4px 0px 10px 10px;
+    border: 3px solid $secondary-color;
+    background-color: $background-color;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    @include ease-transition;
+
+    &:hover {
+      background-color: $primary-color;
+      color: $white;
+      border-color: $background-color;
+
+      svg {
+        color: $background-color;
+      }
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    svg {
+      width: 100%;
+      margin: 7px 0px 0px 0px;
+    }
+  }
+}
+
+.path-wrapper {
+  @include button;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 6%;
+
+  @include tablet {
+    width: 10%;
+  }
+
+  @include mobile {
+    width: 20%;
+  }
+
+  svg {
+    border: none;
+  }
+}
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.popup-overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($color: $primary-color, $alpha: 0.38);
+  z-index: 100;
+  @include ease-transition;
+}
+
+.popup {
+  position: absolute;
+  top: 20px;
+  width: 60%;
+  z-index: 101;
+  background-color: $white;
+  padding: 40px;
+  @include rounded-corners;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  @include ease-transition;
+
+  &-close {
+    position: absolute;
+    top: 0;
+    right: 4px;
+    font-size: 1rem;
+    border: 0;
+    padding: 5px 6px;
+
+    &:hover {
+      border: 0;
+      background-color: transparent;
+      color: $primary-color;
+    }
+  }
+}
+
+.fav-list {
+  position: fixed;
+  display: flex;
+  flex-wrap: wrap;
+  justify-items: flex-start;
+  z-index: 100;
+  bottom: 0;
+  background: $white;
+  width: 100%;
+  border-top: 5px solid $primary-color;
+  padding: 20px;
+  height: 120px;
+  overflow: scroll;
+
+  &-place {
+    width: 33%;
+    position: relative;
+    padding-top: 10px;
+
+    @include mobile {
+      width: 50%;
+    }
+
+    &-remove {
+      position: absolute;
+      top: 0;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+
+   h4 {
+    width: 100%;
+  }
+
+  &-save {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 46px;
+    width: 20%;
+
+    @include mobile {
+      width: 30%;
+    }
+  }
+}
+
+.share {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  &-input {
+    margin-right: 5px;
+    width: 20%;
+    padding: 10px;
+    @include rounded-corners;
+    border: 1px solid $primary-color;
+
+    @include mobile {
+      width: 50%;
+    }
+  }
+
+  &-toast {
+    display: none;
+    position: absolute;
+    top: -26px;
+    background-color: $primary-color;
+    color: $white;
+    width: 80%;
+    text-align: center;
+    padding: 4px;
+    @include rounded-corners;
+  }
+
+  &-click {
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    &:hover {
+      .share-toast {
+        display: block;
+      }
+    }
+  }
+
+  &-button {
+    margin-top: 0;
+  }
+}

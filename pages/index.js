@@ -1,16 +1,26 @@
-import { useEffect, useState } from "react";
-import Head from "next/head";
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
-import { useQuery, gql } from "@apollo/client";
+import React, { useState, useRef } from "react";
+import Place from "../components/Place";
+import Loading from "../components/Loading";
+import Hero from "../components/Hero";
+import { useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+import Meta from "../components/Meta";
+import Category from "../components/Category";
+import Pagination from "../components/Pagination";
+import { perPage } from "../config";
 
-const inter = Inter({ subsets: ["latin"] });
-
-const GET_ALL_PLACES = gql`
-  query GetPlaces {
-    places(where: { neighborhood: { name: { equals: "Logan Square" } } }) {
+const HOME_PLACES_QUERY = gql`
+  query HOME_PLACES_QUERY($offset: Int) {
+    places(
+      skip: $offset
+      where: { neighborhood: { name: { equals: "Logan Square" } } }
+    ) {
       id
+      neighborhood {
+        name
+      }
       name
+      featured
       description {
         document
       }
@@ -18,61 +28,57 @@ const GET_ALL_PLACES = gql`
       mainCategory {
         name
       }
+      subCategory {
+        name
+      }
     }
   }
 `;
 
-export default function Home() {
-  const { loading, error, data } = useQuery(GET_ALL_PLACES);
-  const [statusCheck, setStatusCheck] = useState("");
+export default function Home(props) {
+  const [offset, setOffset] = useState(0);
+  const exploreAll = useRef(null);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
+  const { loading, error, data } = useQuery(HOME_PLACES_QUERY, {
+    fetchPolicy: "network-only",
+    variables: { offset: offset, perPage: perPage },
+  });
 
-  // async function getOperationStatus(place) {
-  //   const api = await fetch(
-  //     `/api/findPlace?placeName=${place.name + " " + place.address}`
-  //   );
-  //   const data = await api.json();
-  //   console.log("api", data.candidates[0].business_status);
-  //   setStatusCheck(data.candidates[0].business_status);
-
-  //   return data.candidates[0].business_status;
-  // }
+  if (error) return <p>Error :( {error}</p>;
+  function handlePageChange(e) {
+    if (e === "previous") setOffset(offset - perPage);
+    if (e === "next") setOffset(offset + perPage);
+    window.scrollTo({
+      top: exploreAll.current.offsetTop,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
 
   return (
-    <>
-      <Head>
-        <title>
-          Hello Logan Square // Things to do in Chicago&apos;s Northwest Side
-          Neighborhood
-        </title>
-        <meta
-          name='description'
-          content='Get to know the Logan Square neighborhood in Chicago IL'
-        />
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-      <main>
-        <div>
-          <h1 style={{ textAlign: "center", margin: "20px" }}>
-            Hello Logan Square
-          </h1>
-        </div>
-        <div className={styles.grid}>
-          {data.places.map((place) => (
-            <div className={styles.card} key={place.id}>
-              <h2 className={inter.className}>{place.name}</h2>
-              <p className={inter.className}>
-                {/* {place.description.document[0].children[0].text} */}
-                {place.mainCategory.name}
-              </p>
-              <p className={inter.className}>{place.address}</p>
-            </div>
-          ))}
-        </div>
-      </main>
-    </>
+    <div className='homepage'>
+      <Hero
+        title='Discover your neighborhood.'
+        subtitle='Find places to eat and drink in Logan Square'
+        search
+      />
+      <Category path='Patio' setList={props.setList} />
+      <Category path='Restaurant' setList={props.setList} />
+      <Category path='Bar' setList={props.setList} />
+      <h3 align='center' ref={exploreAll}>
+        Explore All
+      </h3>
+      <div className='card-wrapper'>
+        {loading ? (
+          <Loading />
+        ) : (
+          data.places.map((place) => (
+            <Place place={place} key={place.id} setList={props.setList} />
+          ))
+        )}
+      </div>
+
+      {/* <Pagination page={offset} handlePageChange={handlePageChange} /> */}
+    </div>
   );
 }
