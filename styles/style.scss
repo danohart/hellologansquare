@@ -501,7 +501,7 @@ button {
 
 .card-wrapper {
   display: flex;
-  padding: 0px 10px;
+  padding: 0px 20px;
   flex-wrap: wrap;
   overflow-x: auto;
   margin-bottom: 10px;
@@ -594,11 +594,11 @@ button {
   .card {
     @include mobile {
       width: 72vw;
-      background-color: transparent;
+      background-color: $primary-color;
       border-right: 1px solid $primary-color;
       border-radius: 0;
       padding: 20px;
-      margin: 20px 0;
+      margin: 20px 10px 0 0;
     }
 
     .featured {
