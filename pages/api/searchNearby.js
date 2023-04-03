@@ -6,7 +6,9 @@ export default async function handler(req, res) {
 
   const location = "&location=41.9225057%2C-87.7098792&radius=1609.34";
   const keyword = `&keyword=${req.query.keyword}`;
-  const fields = `&next_page_token=${req.query.next_page_token}`;
+  const fields = req.query.next_page_token
+    ? `&pagetoken=${req.query.next_page_token}`
+    : "";
 
   const url =
     api_url + "/nearbysearch" + api_output + location + keyword + fields;

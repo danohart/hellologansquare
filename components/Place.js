@@ -62,7 +62,7 @@ export default function Place({ place, setList }) {
         <div className='address'>
           <a
             href={`https://www.google.com/maps/search/?api=1&query=${
-              place.name + " " + place.address.formattedAddress
+              place.name + " " + place.address
             }`}
             target='_blank'
           >

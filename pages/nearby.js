@@ -1,30 +1,52 @@
 import { useState } from "react";
 
 export default function Nearby() {
+  const [term, setTerm] = useState("");
   const [results, setResults] = useState("");
   const [nextPageToken, setNextPageToken] = useState(null);
 
-  async function getPlaceData(keyword) {
-    const data = await fetch(
-      `/api/searchNearby?keyword=${keyword}${
-        nextPageToken ? `&next_page_token=${nextPageToken}` : ""
-      }`
-    );
+  async function getPlaceData(keyword, token) {
+    let url = `/api/searchNearby?keyword=${keyword}`;
+    if (token !== null)
+      url = `/api/searchNearby?keyword=${keyword}&next_page_token=${token}`;
+
+    const data = await fetch(url);
     const results = await data.json();
 
     setResults(results);
-    setNextPageToken(results.next_page_token);
+    setNextPageToken(!results.next_page_token ? null : results.next_page_token);
+
+    return;
   }
 
-  console.log(results);
+  function handleChange(e) {
+    e.preventDefault();
+
+    const searchTerm = e.target.value;
+
+    setTerm(searchTerm);
+
+    return;
+  }
 
   return (
-    <div className='main'>
+    <div className='main' style={{ margin: "0 40px" }}>
       Hello
       <br />
-      <button onClick={() => getPlaceData("restaurant")}>Get</button>
+      <input
+        value={term}
+        placeholder='Search Nearby Logan Square'
+        onChange={handleChange}
+      />
+      <button onClick={() => getPlaceData(term, nextPageToken)}>Get</button>
       <hr />
-      <textarea id='myTextArea' cols='50' rows='10'></textarea>
+      <textarea
+        defaultValue={JSON.stringify(results.results)}
+        id='results-text'
+        cols='100'
+        rows='50'
+      ></textarea>
+      {nextPageToken}
     </div>
   );
 }
