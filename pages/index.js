@@ -9,9 +9,10 @@ import Pagination from "../components/Pagination";
 import { perPage } from "../config";
 
 const HOME_PLACES_QUERY = gql`
-  query HOME_PLACES_QUERY($offset: Int) {
+  query HOME_PLACES_QUERY($skip: Int, $take: Int) {
     places(
-      skip: $offset
+      skip: $skip
+      take: $take
       where: { neighborhood: { name: { equals: "Logan Square" } } }
     ) {
       id
@@ -40,10 +41,10 @@ export default function Home(props) {
 
   const { loading, error, data } = useQuery(HOME_PLACES_QUERY, {
     fetchPolicy: "network-only",
-    variables: { offset: offset, perPage: perPage },
+    variables: { skip: offset, take: perPage },
   });
-
   if (error) return <p>Error :( {error}</p>;
+
   function handlePageChange(e) {
     if (e === "previous") setOffset(offset - perPage);
     if (e === "next") setOffset(offset + perPage);
@@ -77,7 +78,7 @@ export default function Home(props) {
         )}
       </div>
 
-      {/* <Pagination page={offset} handlePageChange={handlePageChange} /> */}
+      <Pagination page={offset} handlePageChange={handlePageChange} />
     </div>
   );
 }
