@@ -378,12 +378,6 @@ button {
 .patio {
   display: flex;
   flex-direction: row;
-
-  // .card-wrapper {
-  //   .card {
-  //     width: 80%;
-  //   }
-  // }
 }
 
 .map {
@@ -590,6 +584,23 @@ button {
   overflow: auto;
   justify-content: left;
   @include cards;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: darken($color: $background-color, $amount: 4);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $secondary-color;
+    border-radius: 20px;
+  }
+
+  @include mobile {
+    padding-bottom: 10px;
+  }
 
   .card {
     @include mobile {
