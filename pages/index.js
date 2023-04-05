@@ -31,6 +31,7 @@ const HOME_PLACES_QUERY = gql`
       subCategory {
         name
       }
+      googleId
     }
   }
 `;

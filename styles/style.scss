@@ -252,14 +252,24 @@ button {
   }
 
   &-logo {
+    margin-top: 10px;
     height: auto;
     padding: 20px;
     font-size: 65px;
     font-weight: 900;
 
+    &-hello {
+      transform: skew(0deg, -3deg);
+      font-weight: 300;
+      line-height: 5px;
+    }
+
+    &-neighborhood {
+      transform: skew(0deg, -3deg);
+    }
+
     a {
       color: $primary-color;
-      text-decoration: underline;
     }
 
     @include tablet {

@@ -21,7 +21,10 @@ export default function Header() {
       <Signin />
       <div className='header'>
         <div className='header-logo'>
-          <Link href='/'>Hello Logan Square</Link>
+          <Link href='/'>
+            <div className='header-logo-hello'>Hello</div>
+            <div className='header-logo-neighborhood'>Logan Square</div>
+          </Link>
         </div>
         {/* <input
         className='header-search'

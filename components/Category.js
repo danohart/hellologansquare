@@ -7,14 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleRight } from "@fortawesome/free-solid-svg-icons";
 
 const CATEGORY_PLACES_QUERY = gql`
-  query CATEGORY_PLACES_QUERY($query: String!) {
+  query CATEGORY_PLACES_QUERY($query: String!, $lowerCase: String) {
     places(
       where: {
         neighborhood: { name: { equals: "Logan Square" } }
         featured: { equals: true }
         OR: [
           { mainCategory: { name: { contains: $query } } }
-          { details: { some: { name: { equals: "patio" } } } }
+          { details: { some: { name: { equals: $lowerCase } } } }
         ]
       }
     ) {
@@ -40,7 +40,7 @@ const CATEGORY_PLACES_QUERY = gql`
 
 export default function Category(props) {
   const { loading, error, data } = useQuery(CATEGORY_PLACES_QUERY, {
-    variables: { query: props.path },
+    variables: { query: props.path, lowerCase: props.path.toLowerCase() },
   });
 
   if (error) return <p>Error :( {error}</p>;
