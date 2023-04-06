@@ -123,6 +123,7 @@ export default function Nearby() {
       <hr />
       {placesData.places.map((place) => (
         <div
+          key={place.id}
           style={
             !place.googleId
               ? { display: "none" }

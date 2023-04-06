@@ -50,8 +50,7 @@ export default function Place({ place, setList }) {
         <h2 className='title'>
           <Link
             href={{
-              pathname: "/place",
-              query: { id: place.id },
+              pathname: "/place/" + place.id,
             }}
           >
             {place.name}

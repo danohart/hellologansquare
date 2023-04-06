@@ -3,10 +3,10 @@ import { ApolloProvider } from "@apollo/client";
 import Page from "../components/Page";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "../styles/style.scss";
-import { client } from "@/lib/withData";
+import { Client } from "@/lib/withData";
 import FavoritesList from "../components/FavoritesList";
 function App({ Component, pageProps: { ...pageProps } }) {
-  const apolloClient = client(pageProps.initialApolloState);
+  const apolloClient = Client(pageProps.initialApolloState);
 
   const [favList, setFavList] = useState([]);
 
