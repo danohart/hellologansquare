@@ -27,14 +27,19 @@
   font-size: 14px;
   font-weight: bold;
   text-align: center;
-  color: $black;
-  background: $white;
+  color: $secondary-color-bold;
+  background: $primary-color;
   padding: 12px 20px;
   border: 2px solid $primary-color;
   @include rounded-corners;
   margin-top: 5px;
   cursor: pointer;
   @include ease-transition;
+
+  &.large {
+    padding: 18px 42px;
+    font-size: 18px;
+  }
 
   &.loading {
     opacity: 0.2;
@@ -58,8 +63,8 @@
   }
 
   &:hover {
-    background: $black;
-    color: $white;
+    background: $secondary-color-bold;
+    color: $secondary-color;
     border: 2px solid $secondary-color;
   }
 

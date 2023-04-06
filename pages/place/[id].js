@@ -1,37 +1,37 @@
-import Loading from "../components/Loading";
+import Loading from "../../components/Loading";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { gql, useQuery } from "@apollo/client";
 import { DocumentRenderer } from "@keystone-6/document-renderer";
-import { CategoryIcon, PathIcon } from "../components/Icons";
-
-const SINGLE_PLACE = gql`
-  query SINGLE_PLACE($id: ID!) {
-    place(where: { id: $id }) {
-      id
-      name
-      description {
-        document
-      }
-      address
-      image {
-        filename
-      }
-      mainCategory {
-        name
-      }
-    }
-  }
-`;
+import { CategoryIcon, PathIcon } from "../../components/Icons";
 
 export default function Place() {
   const router = useRouter();
-  const id = router.query.id;
+  const { id } = router.query;
+
+  const SINGLE_PLACE = gql`
+    query SINGLE_PLACE($id: ID!) {
+      place(where: { id: $id }) {
+        id
+        name
+        description {
+          document
+        }
+        address
+        image {
+          filename
+        }
+        mainCategory {
+          name
+        }
+      }
+    }
+  `;
+
   const { loading, error, data } = useQuery(SINGLE_PLACE, {
-    variables: {
-      id: id,
-    },
+    variables: { id },
   });
+
   if (loading) return <div className='place-single'>Please wait...</div>;
   if (error)
     return (

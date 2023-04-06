@@ -6,6 +6,8 @@ import "../styles/style.scss";
 import { client } from "@/lib/withData";
 import FavoritesList from "../components/FavoritesList";
 function App({ Component, pageProps: { ...pageProps } }) {
+  const apolloClient = client(pageProps.initialApolloState);
+
   const [favList, setFavList] = useState([]);
 
   function addOrRemoveToFavList(place, clear) {
@@ -22,7 +24,7 @@ function App({ Component, pageProps: { ...pageProps } }) {
   }
 
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={apolloClient}>
       <Page>
         <Component
           {...pageProps}

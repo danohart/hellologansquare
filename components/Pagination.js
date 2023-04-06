@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 import { perPage } from "../config";
 import Loading from "./Loading";
+import { useRouter } from "next/router";
+import Error from "@/lib/ErrorMessage";
 
 const PAGINATION_QUERY = gql`
   query PAGINATION_QUERY {
@@ -12,32 +14,28 @@ const PAGINATION_QUERY = gql`
 `;
 
 function Pagination({ page, handlePageChange }) {
-  const [pageNumber, setPageNumber] = useState(1);
-
-  async function changePage(e) {
-    if (e === "previous") setPageNumber((prevState) => prevState - 1);
-    if (e === "next") setPageNumber((prevState) => prevState + 1);
-
-    return handlePageChange(e);
-  }
-
+  const router = useRouter();
   const { error, loading, data } = useQuery(PAGINATION_QUERY);
   if (loading) return <Loading />;
+  if (error) return <Error error={error} />;
 
   const pages = Math.ceil(data.places.length / perPage);
 
   return (
     <div className='pagination'>
       <button
-        onClick={() => changePage("previous")}
-        disabled={pageNumber === 1}
+        onClick={() => handlePageChange("previous")}
+        disabled={!router.query.page && router.query.page === 1}
       >
         ← Prev
       </button>
       <p>
-        Page {pageNumber} of {pages}
+        Page {router.query.page ? router.query.page : "1"} of {pages}
       </p>
-      <button onClick={() => changePage("next")} disabled={pageNumber >= pages}>
+      <button
+        onClick={() => handlePageChange("next")}
+        disabled={router.query.page >= pages}
+      >
         Next →
       </button>
     </div>

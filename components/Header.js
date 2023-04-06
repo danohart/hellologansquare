@@ -9,7 +9,6 @@ import {
   faInfinity,
   faUmbrellaBeach,
 } from "@fortawesome/free-solid-svg-icons";
-import { Signin } from "./Signin";
 
 export default function Header() {
   const [search, setSearch] = useState("");
@@ -18,7 +17,6 @@ export default function Header() {
 
   return (
     <>
-      <Signin />
       <div className='header'>
         <div className='header-logo'>
           <Link href='/'>
@@ -44,8 +42,7 @@ export default function Header() {
             {icon.map((icon) => (
               <Link
                 href={{
-                  pathname: "/category",
-                  query: { type: icon },
+                  pathname: "/category/" + icon,
                 }}
                 key={icon}
               >

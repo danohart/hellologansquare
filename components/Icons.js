@@ -30,8 +30,7 @@ function CategoryIcon({ icon }) {
         <div className='icon'>
           <Link
             href={{
-              pathname: "/category",
-              query: { type: icon },
+              pathname: "/category/" + icon,
             }}
           >
             <FontAwesomeIcon icon={category} title={icon} />

@@ -1,38 +1,38 @@
 import React from "react";
 import { useRouter } from "next/router";
-import Loading from "../components/Loading";
+import Loading from "../../components/Loading";
 import { gql, useQuery } from "@apollo/client";
-import Place from "../components/Place";
-import Hero from "../components/Hero";
-import Meta from "../components/Meta";
-
-const CATEGORY_PLACES_QUERY = gql`
-  query CATEGORY_PLACES_QUERY($category: String!) {
-    places(
-      where: {
-        neighborhood: { name: { equals: "Logan Square" } }
-        OR: [{ mainCategory: { name: { equals: $category } } }]
-      }
-    ) {
-      id
-      name
-      description {
-        document
-      }
-      details {
-        name
-      }
-      address
-      mainCategory {
-        name
-      }
-    }
-  }
-`;
+import Place from "../../components/Place";
+import Hero from "../../components/Hero";
+import Meta from "../../components/Meta";
 
 export default function Category(props) {
   const router = useRouter();
-  const type = router.query.type;
+  const { type } = router.query;
+
+  const CATEGORY_PLACES_QUERY = gql`
+    query CATEGORY_PLACES_QUERY($category: String!) {
+      places(
+        where: {
+          neighborhood: { name: { equals: "Logan Square" } }
+          OR: [{ mainCategory: { name: { equals: $category } } }]
+        }
+      ) {
+        id
+        name
+        description {
+          document
+        }
+        details {
+          name
+        }
+        address
+        mainCategory {
+          name
+        }
+      }
+    }
+  `;
 
   const { loading, error, data } = useQuery(CATEGORY_PLACES_QUERY, {
     variables: { category: type },
