@@ -143,6 +143,10 @@ $desktop-width: 1024px;
     @include rounded-corners;
     @include ease-transition;
 
+    @include tablet {
+      width: 36%;
+    }
+
     @include mobile {
       border: 0;
       padding: 10px;

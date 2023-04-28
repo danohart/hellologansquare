@@ -1,19 +1,18 @@
 import { useState } from "react";
-import PigeonMap from "pigeon-maps";
-import Overlay from "pigeon-overlay";
+import { Map, Overlay } from "pigeon-maps";
 import Pin from "./Pin";
 import Place from "./Place";
 
-const MAPTILER_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPTILER_ACCESS;
-const MAP_ID = "basic";
-
-function mapTilerProvider(x, y, z, dpr) {
-  return `https://api.maptiler.com/maps/${MAP_ID}/256/${z}/${x}/${y}${
-    dpr >= 2 ? "@2x" : ""
-  }.png?key=${MAPTILER_ACCESS_TOKEN}`;
-}
-
 export default function MapComponent(props) {
+  const MAPTILER_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPTILER_ACCESS;
+  const MAP_ID = "basic";
+
+  function mapTilerProvider(x, y, z, dpr) {
+    return `https://api.maptiler.com/maps/${MAP_ID}/256/${z}/${x}/${y}${
+      dpr >= 2 ? "@2x" : ""
+    }.png?key=${MAPTILER_ACCESS_TOKEN}`;
+  }
+
   const [allPlaces, setAllPlaces] = useState(props.placeIds);
   const [centerOfMap, setCenterOfMap] = useState(props.centerOfMap);
   const [zoomIn, setZoomIn] = useState(15);
@@ -43,11 +42,7 @@ export default function MapComponent(props) {
   return (
     <div className='map'>
       <div className='map-places'>
-        <PigeonMap
-          center={centerOfMap}
-          zoom={zoomIn}
-          provider={mapTilerProvider}
-        >
+        <Map center={centerOfMap} zoom={zoomIn} provider={mapTilerProvider}>
           {allPlaces.map((location) => (
             <Overlay
               anchor={[location.address.lat, location.address.lng]}
@@ -60,7 +55,7 @@ export default function MapComponent(props) {
               />
             </Overlay>
           ))}
-        </PigeonMap>
+        </Map>
       </div>
       <div className='map-list'>
         <div className='card-wrapper'>

@@ -20,6 +20,8 @@
     "eslint-config-next": "13.2.4",
     "graphql": "^16.6.0",
     "next": "13.2.4",
+    "pigeon-maps": "^0.21.3",
+    "pigeon-overlay": "^0.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-ga": "^3.3.1",

@@ -11,12 +11,10 @@ import { useState } from "react";
 
 const MAP_PIN_QUERY = gql`
   query ($id: ID!) {
-    Place(where: { id: $id }) {
+    place(where: { id: $id }) {
       id
       name
-      address {
-        formattedAddress
-      }
+      address
       mainCategory {
         name
       }
@@ -38,7 +36,7 @@ export default function Pin({ openPopup, closePopup, placeId }) {
       <div className={showMarkerInfo ? "pin show" : "pin"}>
         <FontAwesomeIcon
           icon={faMapMarker}
-          title={data.Place.name}
+          title={data.place.name}
           onClick={() => setShowMarkerInfo(true)}
         />
       </div>
@@ -47,7 +45,7 @@ export default function Pin({ openPopup, closePopup, placeId }) {
           <a
             target='_blank'
             href={`https://www.google.com/maps/search/?api=1&query=${
-              data.Place.name + " " + data.Place.address.formattedAddress
+              data.place.name + " " + data.place.address.formattedAddress
             }`}
           >
             <FontAwesomeIcon icon={faDirections} />
@@ -57,10 +55,10 @@ export default function Pin({ openPopup, closePopup, placeId }) {
             onClick={() => setShowMarkerInfo(false)}
           />
         </div>
-        <h3>{data.Place.name}</h3>
-        <p>{data.Place.address.formattedAddress.split(",")[0]}</p>
+        <h3>{data.place.name}</h3>
+        <p>{data.place.address}</p>
         <div className='pin-info-type'>
-          Type of place: {data.Place.mainCategory.name}
+          Type of place: {data.place.mainCategory.name}
         </div>
       </div>
     </>
