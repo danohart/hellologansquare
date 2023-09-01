@@ -17,6 +17,7 @@ export default function Place() {
         description {
           document
         }
+        simpleDescription
         address
         image {
           filename
@@ -72,9 +73,7 @@ export default function Place() {
         </div>
         <div className='inner'>
           <div className='additional-info'>
-            <p>
-              <DocumentRenderer document={place.description.document} />
-            </p>
+            <p>{place.simpleDescription}</p>
             <div className='address'>{place.address}</div>
           </div>
         </div>

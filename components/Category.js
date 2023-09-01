@@ -27,6 +27,7 @@ const CATEGORY_PLACES_QUERY = gql`
       description {
         document
       }
+      simpleDescription
       address
       mainCategory {
         name

@@ -7,7 +7,6 @@ import {
   faMinus,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { DocumentRenderer } from "@keystone-6/document-renderer";
 
 export default function Place({ place, setList }) {
   const [isAdded, setIsAdded] = useState(false);
@@ -69,9 +68,7 @@ export default function Place({ place, setList }) {
           </a>
         </div>
         <div className='additional-info'>
-          <p>
-            <DocumentRenderer document={place.description.document} />
-          </p>
+          <p>{place.simpleDescription}</p>
         </div>
       </div>
       {place.hours ? (

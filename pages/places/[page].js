@@ -23,6 +23,7 @@ const HOME_PLACES_QUERY = gql`
       description {
         document
       }
+      simpleDescription
       address
       mainCategory {
         name
