@@ -79,6 +79,20 @@ export default function Place() {
         </div>
         <PathIcon icon={place.path} />
       </div>
+      <div className='map'>
+        <iframe
+          src={
+            "https://www.google.com/maps/embed/v1/place?key=AIzaSyAuttk2zvb-3npbAgYFWg0vl_jc_0mYf0U&q=" +
+            place.name +
+            " " +
+            place.address
+          }
+          width='600'
+          height='450'
+          allowFullScreen
+          className='map-iframe'
+        />
+      </div>
     </div>
   );
 }

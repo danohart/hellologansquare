@@ -23,6 +23,7 @@ export default function Category(props) {
         description {
           document
         }
+        simpleDescription
         details {
           name
         }

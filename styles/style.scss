@@ -403,6 +403,10 @@ button {
   flex-direction: row;
   justify-content: space-evenly;
 
+  &-iframe {
+    border: 0;
+  }
+
   &-places {
     margin: 0 auto;
     display: block;
