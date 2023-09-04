@@ -22,6 +22,7 @@ const PATIO_QUERY = gql`
       description {
         document
       }
+      simpleDescription
       address
       details {
         name
