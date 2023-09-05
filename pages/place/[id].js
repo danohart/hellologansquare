@@ -7,7 +7,7 @@ export default function Place({ place }) {
   return (
     <div className='place-single'>
       <Meta
-        title={`${place.name} : A $ {place.mainCategory.name} in Chicago // Find things
+        title={`${place.name} : A ${place.mainCategory.name} in Chicago // Find things
           to do in Chicago like a local`}
         description={`${place.name} is a ${place.mainCategory.name} in Chicago, IL`}
       />
