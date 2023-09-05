@@ -1,48 +1,9 @@
-import Loading from "../../components/Loading";
-import { useRouter } from "next/router";
 import Head from "next/head";
-import { gql, useQuery } from "@apollo/client";
-import { DocumentRenderer } from "@keystone-6/document-renderer";
+import { gql } from "@apollo/client";
 import { CategoryIcon, PathIcon } from "../../components/Icons";
+import { initializeApollo } from "@/lib/withData";
 
-export default function Place() {
-  const router = useRouter();
-  const { id } = router.query;
-
-  const SINGLE_PLACE = gql`
-    query SINGLE_PLACE($id: ID!) {
-      place(where: { id: $id }) {
-        id
-        name
-        description {
-          document
-        }
-        simpleDescription
-        address
-        image {
-          filename
-        }
-        mainCategory {
-          name
-        }
-      }
-    }
-  `;
-
-  const { loading, error, data } = useQuery(SINGLE_PLACE, {
-    variables: { id },
-  });
-
-  if (loading) return <div className='place-single'>Please wait...</div>;
-  if (error)
-    return (
-      <p>
-        Error <p>{error}</p>
-      </p>
-    );
-
-  const place = data.place;
-
+export default function Place({ place }) {
   return (
     <div className='place-single'>
       <Head>
@@ -95,4 +56,56 @@ export default function Place() {
       </div>
     </div>
   );
+}
+
+// This function gets called at build time
+export async function getStaticPaths() {
+  // Call an external API endpoint to get posts
+  const apolloClient = initializeApollo();
+  const { data } = await apolloClient.query({
+    query: gql`
+      query ALL_PLACES_QUERY {
+        places(where: { neighborhood: { name: { equals: "Logan Square" } } }) {
+          id
+        }
+      }
+    `,
+  });
+  // Get the paths we want to pre-render based on posts
+  const paths = data.places.map((place) => ({
+    params: { id: place.id },
+  }));
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: false } means other routes should 404.
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  const apolloClient = initializeApollo();
+  const { data } = await apolloClient.query({
+    query: gql`
+      query SINGLE_PLACE($id: ID!) {
+        place(where: { id: $id }) {
+          id
+          name
+          description {
+            document
+          }
+          simpleDescription
+          address
+          image {
+            filename
+          }
+          mainCategory {
+            name
+          }
+        }
+      }
+    `,
+    variables: { id: params.id },
+  });
+  const place = data.place;
+
+  return { props: { place } };
 }
