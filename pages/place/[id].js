@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Meta from "@/components/Meta";
 import { gql } from "@apollo/client";
 import { CategoryIcon, PathIcon } from "../../components/Icons";
 import { initializeApollo } from "@/lib/withData";
@@ -6,25 +6,11 @@ import { initializeApollo } from "@/lib/withData";
 export default function Place({ place }) {
   return (
     <div className='place-single'>
-      <Head>
-        <title>
-          {place.name} : A {place.mainCategory.name} in Chicago // Find things
-          to do in Chicago like a local
-        </title>
-        <meta
-          name='description'
-          content={`${place.name} is a ${place.mainCategory.name} in Chicago, IL`}
-        />
-        <script type='application/ld+json'>{`
-         {
-            "@context": "https://schema.org/",
-            "@type": "Place",
-            "name": "${place.name}",
-            "description": "${place.description}",
-            ${place.image ? `"image":"${place.image.filename}",` : ``}
-          }
-        `}</script>
-      </Head>
+      <Meta
+        title={`${place.name} : A $ {place.mainCategory.name} in Chicago // Find things
+          to do in Chicago like a local`}
+        description={`${place.name} is a ${place.mainCategory.name} in Chicago, IL`}
+      />
       <div className='card' key={place.id}>
         <div className='title-wrapper'>
           <h2 className='title'>{place.name}</h2>
