@@ -38,7 +38,7 @@ export default function Place({ place }) {
           <div>
             <h3>Happy Hour Specials</h3>
             {happyHour.day.map((day) => (
-              <div>{day.name + ": " + day.drink_specials}</div>
+              <div key={day.id}>{day.name + ": " + day.drink_specials}</div>
             ))}
           </div>
         ) : null}
