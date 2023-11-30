@@ -3,7 +3,7 @@ import Place from "../components/Place";
 import Loading from "../components/Loading";
 import Hero from "../components/Hero";
 import { gql, useQuery } from "@apollo/client";
-import Meta from "../components/Meta";
+import Error from "../components/Error";
 import Category from "../components/Category";
 import Pagination from "../components/Pagination";
 import { perPage } from "../config";
@@ -46,7 +46,7 @@ export default function Home({ places, setList }) {
   const { loading, error, data } = useQuery(HOME_PLACES_QUERY, {
     variables: { skip: offset, take: perPage },
   });
-  if (error) return <p>Error :( {error}</p>;
+  if (error) return <Error error={error} />;
 
   return (
     <div className='homepage'>

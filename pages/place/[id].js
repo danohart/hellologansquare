@@ -2,8 +2,16 @@ import Meta from "@/components/Meta";
 import { gql } from "@apollo/client";
 import { CategoryIcon, PathIcon } from "../../components/Icons";
 import { initializeApollo } from "@/lib/withData";
+import { getHappyHourData } from "@/lib/scripts";
+import { useEffect, useState } from "react";
 
 export default function Place({ place }) {
+  const [happyHour, setHappyHour] = useState("None");
+
+  useEffect(() => {
+    getHappyHourData(place).then((res) => setHappyHour(res));
+  }, []);
+
   return (
     <div className='place-single'>
       <Meta
@@ -25,21 +33,32 @@ export default function Place({ place }) {
           </div>
         </div>
         <PathIcon icon={place.path} />
+
+        {happyHour !== "None" ? (
+          <div>
+            <h3>Happy Hour Specials</h3>
+            {happyHour.day.map((day) => (
+              <div>{day.name + ": " + day.drink_specials}</div>
+            ))}
+          </div>
+        ) : null}
       </div>
-      <div className='map'>
-        <iframe
-          src={
-            "https://www.google.com/maps/embed/v1/place?key=AIzaSyAuttk2zvb-3npbAgYFWg0vl_jc_0mYf0U&q=" +
-            place.name +
-            " " +
-            place.address
-          }
-          width='600'
-          height='450'
-          allowFullScreen
-          className='map-iframe'
-        />
-      </div>
+      {process.env.NODE_ENV !== "development" ? (
+        <div className='map'>
+          <iframe
+            src={
+              `https://www.google.com/maps/embed/v1/place?key=${process.env.MAPS_API_KEY}&q=` +
+              place.name +
+              " " +
+              place.address
+            }
+            width='600'
+            height='450'
+            allowFullScreen
+            className='map-iframe'
+          />
+        </div>
+      ) : null}
     </div>
   );
 }
