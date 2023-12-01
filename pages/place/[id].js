@@ -2,23 +2,13 @@ import Meta from "@/components/Meta";
 import { gql } from "@apollo/client";
 import { CategoryIcon, PathIcon } from "../../components/Icons";
 import { initializeApollo } from "@/lib/withData";
+import { getHappyHourData } from "@/lib/scripts";
 import { useEffect, useState } from "react";
 
 export default function Place({ place }) {
   const [happyHour, setHappyHour] = useState("None");
 
   useEffect(() => {
-    async function getHappyHourData(place) {
-      const response = await fetch("/api/happyHour");
-      const data = await response.json();
-
-      const whatIsTheSpecial = data.filter(
-        ({ name: id1 }) => place.name === id1
-      );
-
-      return whatIsTheSpecial.length > 0 ? whatIsTheSpecial[0] : "None";
-    }
-
     getHappyHourData(place).then((res) => setHappyHour(res));
   }, []);
 
