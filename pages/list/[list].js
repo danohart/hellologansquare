@@ -16,9 +16,7 @@ export default function List(props) {
         places {
           id
           name
-          description {
-            document
-          }
+          simpleDescription
           address
           image {
             filename
